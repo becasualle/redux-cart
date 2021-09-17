@@ -1,9 +1,12 @@
 import React from "react";
 import CartItem from "./CartItem";
 import { connect } from "react-redux";
-import { CLEAR_CART } from '../actions';
+import { CLEAR_CART, GET_TOTALS } from '../actions';
 
 const CartContainer = ({ cart = [], total, dispatch }) => {
+  React.useEffect(() => {
+    dispatch({ type: GET_TOTALS })
+  })
   if (cart.length === 0) {
     return (
       <section className="cart">
@@ -41,6 +44,8 @@ const CartContainer = ({ cart = [], total, dispatch }) => {
   );
 };
 
+// get props and dispatch from state using mapStateToProps
+// another way to get dispatch - using mapDispatchToProps (in CartItem)
 const mapStateToProps = state => {
   const { cart, total } = state;
   return { cart, total }
