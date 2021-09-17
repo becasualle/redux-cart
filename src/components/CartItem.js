@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { INCREASE, DECREASE, REMOVE, TOGGLE_AMOUNT } from "../actions";
+import { INCREASE, DECREASE, TOGGLE_AMOUNT, removeItem } from "../actions";
 
 const CartItem = ({ img, title, price, amount, remove, increase, decrease, toggle }) => {
 
@@ -40,7 +40,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   const { id, amount } = ownProps;
   // return dispatches, so we can access them in component props
   return {
-    remove: () => dispatch({ type: REMOVE, payload: { id } }),
+    remove: () => dispatch(removeItem(id)),
     increase: () => dispatch({ type: INCREASE, payload: { id } }),
     decrease: () => dispatch({ type: DECREASE, payload: { id, amount } }),
     toggle: (toggle) => dispatch({ type: TOGGLE_AMOUNT, payload: { id, toggle } })
